@@ -1,0 +1,16 @@
+name: ShardPlugin
+version: '${project.version}'
+main: com.example.shardplugin.ShardPlugin
+api-version: '1.20'
+commands:
+  shards:
+    description: Show your shard balance
+    usage: /<command>
+  armorshop:
+    description: Open the armor shop GUI, reload config, or manage shards
+    usage: /<command> [reload|shards give <player> <amount>]
+    permission: shardplugin.admin
+  giveshards:
+    description: Give shards to a player (Admin only)
+    usage: /<command> <player> <amount>
+    permission: shardplugin.admin

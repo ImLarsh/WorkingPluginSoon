@@ -1,0 +1,891 @@
+settings:
+  # Currency item settings
+  currency:
+    material: AMETHYST_SHARD
+    custom_model_data: 1001
+    enchanted:
+      material: AMETHYST_SHARD
+      custom_model_data: 1002
+      conversion_rate: 10  # Regular shards needed for 1 enchanted shard
+    void:
+      material: AMETHYST_SHARD
+      custom_model_data: 1003
+      conversion_rate: 5  # Enchanted shards needed for 1 void shard
+      name: "§5✧ Void Shard"
+      lore:
+        - "§7A shard pulsing with void energy"
+        - "§7Used to purchase the most powerful equipment"
+        - "§5§lVoid-infused"
+    pickaxe:
+      material: AMETHYST_SHARD
+      custom_model_data: 1004
+      name: "§6⛏ Pickaxe Shard"
+      lore:
+        - "§7A shard imbued with mining power"
+        - "§7Used to purchase pickaxes"
+    enchanted_pickaxe:
+      material: AMETHYST_SHARD
+      custom_model_data: 1005
+      name: "§d⛏ Enchanted Pickaxe Shard"
+      conversion_rate: 8  # Regular pickaxe shards needed for 1 enchanted pickaxe shard
+      lore:
+        - "§7A mystical pickaxe shard"
+        - "§7Used to purchase powerful pickaxes"
+        - "§d§lEnchanted"
+
+  # Message settings
+  messages:
+    enabled: true
+    prefix: "§8[§bShards§8]"
+    shard_gain: "%prefix% §a+%amount% shards!"
+    pickaxe_shard_gain: "%prefix% §a+%amount% pickaxe shards!"
+    enchanted_pickaxe_shard_gain: "%prefix% §a+%amount% enchanted pickaxe shards!"
+    insufficient_shards: "%prefix% §cYou don't have enough shards!"
+    insufficient_enchanted_shards: "%prefix% §cYou don't have enough enchanted shards!"
+    insufficient_void_shards: "%prefix% §cYou don't have enough void shards!"
+    insufficient_pickaxe_shards: "%prefix% §cYou don't have enough pickaxe shards!"
+    insufficient_enchanted_pickaxe_shards: "%prefix% §cYou don't have enough enchanted pickaxe shards!"
+    purchase_success: "%prefix% §aYou purchased %item%!"
+    error_occurred: "%prefix% §cAn error occurred while processing your purchase."
+    balance: "%prefix% §aYou have %amount% shards!"
+    give_shards_sender: "%prefix% §aGave %amount% shards to %player%"
+    give_shards_receiver: "%prefix% §aYou received %amount% shards!"
+    player_not_found: "%prefix% §cPlayer not found!"
+    no_permission: "%prefix% §cYou don't have permission to use this command!"
+    invalid_amount: "%prefix% §cInvalid amount!"
+    cannot_drop_armor: "%prefix% §cYou cannot drop special armor pieces!"
+    cannot_drop_pickaxe: "%prefix% §cYou cannot drop special pickaxes!"
+    enchanted_shard_purchase: "%prefix% §aYou converted %regular% regular shards into %enchanted% enchanted shards!"
+    void_shard_purchase: "%prefix% §aYou converted %enchanted% enchanted shards into %void% void shards!"
+    enchanted_pickaxe_shard_purchase: "%prefix% §aYou converted %regular% pickaxe shards into %enchanted% enchanted pickaxe shards!"
+
+  # GUI settings
+  gui:
+    title: Mining Shop
+    size: 54  # 6 rows of 9 slots
+    # Fill empty slots with this item (optional)
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      name: " "
+      hide_attributes: true
+    navigation:
+      previous_page:
+        slot: 45
+        material: ARROW
+        name: "§e← Previous Page"
+        hide_attributes: true
+      next_page:
+        slot: 53
+        material: ARROW
+        name: "§e→ Next Page"
+        hide_attributes: true
+      info:
+        slot: 49
+        material: BOOK
+        name: "§ePage %page%/%total%"
+        hide_attributes: true
+    enchanted_shard:
+      slot: 16
+      page: 1
+      material: AMETHYST_SHARD
+      custom_model_data: 1002
+      name: "§d✨ Enchanted Shard"
+      hide_attributes: true
+      lore:
+        - "§7A mystical shard infused with"
+        - "§7magical properties."
+        - ""
+        - "§7Cost: §e10 regular shards"
+        - ""
+        - "§dClick to convert regular shards"
+        - "§dinto enchanted shards!"
+    void_shard:
+      slot: 16
+      page: 3
+      material: AMETHYST_SHARD
+      custom_model_data: 1003
+      name: "§5✧ Void Shard"
+      hide_attributes: true
+      lore:
+        - "§7A shard pulsing with void energy"
+        - "§7Used to purchase the most"
+        - "§7powerful equipment"
+        - ""
+        - "§7Cost: §d5 enchanted shards"
+        - ""
+        - "§5Click to convert enchanted shards"
+        - "§5into void shards!"
+    enchanted_pickaxe_shard:
+      slot: 25
+      page: 2
+      material: AMETHYST_SHARD
+      custom_model_data: 1005
+      name: "§d⛏ Enchanted Pickaxe Shard"
+      hide_attributes: true
+      lore:
+        - "§7A mystical pickaxe shard"
+        - "§7Used to purchase powerful pickaxes"
+        - ""
+        - "§7Cost: §68 pickaxe shards"
+        - ""
+        - "§dClick to convert pickaxe shards"
+        - "§dinto enchanted pickaxe shards!"
+
+  # Blocks that drop shards when broken
+  shard_blocks:
+    DIAMOND_ORE:
+      amount: 5
+      pickaxe_shard_amount: 3
+      command_chance: 0.5
+      commands:
+        - "give %player% minecraft:diamond 1"
+        - "effect give %player% minecraft:haste 30 1"
+    EMERALD_ORE:
+      amount: 4
+      pickaxe_shard_amount: 2
+      command_chance: 0.5
+      commands:
+        - "give %player% minecraft:emerald 1"
+        - "effect give %player% minecraft:luck 30 1"
+    GOLD_ORE:
+      command_chance: 0.5
+      amount: 3
+      pickaxe_shard_amount: 2
+      commands:
+        - "give %player% minecraft:raw_gold 1"
+    IRON_ORE:
+      command_chance: 0.5
+      amount: 2
+      pickaxe_shard_amount: 1
+      commands:
+        - "give %player% minecraft:raw_iron 1"
+    COAL_ORE:
+      command_chance: 0.5
+      amount: 1
+      pickaxe_shard_amount: 1
+      commands:
+        - "give %player% minecraft:coal 1"
+
+armor_sets:
+  # Novice Miner Set (Tier 1 - Brown Leather)
+  NOVICE_MINER:
+    name: "Novice Miner's Armor"
+    page: 1
+    tier: 1
+    slots:
+      helmet: 10
+      chestplate: 19
+      leggings: 28
+      boots: 37
+    cost:
+      helmet: 100
+      chestplate: 150
+      leggings: 125
+      boots: 75
+    pieces:
+      helmet:
+        multiplier: 1.1
+        rolls: 1
+      chestplate:
+        multiplier: 1.2
+        rolls: 1
+      leggings:
+        multiplier: 1.15
+        rolls: 1
+      boots:
+        multiplier: 1.1
+        rolls: 1
+    gui:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§6⛏ Novice Miner's Helmet"
+        custom_model_data: 1001
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7A basic leather helmet for mining"
+          - "§7Perfect for beginners"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+10% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§6⛏ Novice Miner's Chestplate"
+        custom_model_data: 1002
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Basic leather protection"
+          - "§7Keeps your clothes clean"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+20% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§6⛏ Novice Miner's Leggings"
+        custom_model_data: 1003
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Simple leather pants"
+          - "§7Comfortable for mining"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+15% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§6⛏ Novice Miner's Boots"
+        custom_model_data: 1004
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Basic leather boots"
+          - "§7Keeps your feet safe"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+10% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+    armor:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§6⛏ Novice Miner's Helmet"
+        custom_model_data: 1001
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7A basic leather helmet for mining"
+          - "§7Perfect for beginners"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§6⛏ Novice Miner's Chestplate"
+        custom_model_data: 1002
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Basic leather protection"
+          - "§7Keeps your clothes clean"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§6⛏ Novice Miner's Leggings"
+        custom_model_data: 1003
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Simple leather pants"
+          - "§7Comfortable for mining"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§6⛏ Novice Miner's Boots"
+        custom_model_data: 1004
+        hide_attributes: true
+        color:
+          red: 139
+          green: 69
+          blue: 19
+        lore:
+          - "§7Basic leather boots"
+          - "§7Keeps your feet safe"
+
+  # Forest Guardian Set (Tier 2 - Green Leather)
+  FOREST_GUARDIAN:
+    name: "Forest Guardian's Armor"
+    page: 1
+    tier: 2
+    requires: "NOVICE_MINER"
+    slots:
+      helmet: 11
+      chestplate: 20
+      leggings: 29
+      boots: 38
+    cost:
+      helmet: 200
+      chestplate: 300
+      leggings: 250
+      boots: 150
+    pieces:
+      helmet:
+        multiplier: 1.25
+        rolls: 1
+      chestplate:
+        multiplier: 1.35
+        rolls: 2
+      leggings:
+        multiplier: 1.3
+        rolls: 1
+      boots:
+        multiplier: 1.25
+        rolls: 1
+    gui:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§2🌳 Forest Guardian's Hood"
+        custom_model_data: 2001
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Blends with the forest canopy"
+          - "§7Enchanted with nature's blessing"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+25% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§2🌳 Forest Guardian's Tunic"
+        custom_model_data: 2002
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Woven from enchanted leaves"
+          - "§7Provides camouflage in forests"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+35% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§2🌳 Forest Guardian's Leggings"
+        custom_model_data: 2003
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Light as a feather"
+          - "§7Perfect for forest traversal"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+30% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§2🌳 Forest Guardian's Boots"
+        custom_model_data: 2004
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Silent steps through the woods"
+          - "§7Leaves no footprints"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+25% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+    armor:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§2🌳 Forest Guardian's Hood"
+        custom_model_data: 2001
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Blends with the forest canopy"
+          - "§7Enchanted with nature's blessing"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§2🌳 Forest Guardian's Tunic"
+        custom_model_data: 2002
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Woven from enchanted leaves"
+          - "§7Provides camouflage in forests"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§2🌳 Forest Guardian's Leggings"
+        custom_model_data: 2003
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Light as a feather"
+          - "§7Perfect for forest traversal"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§2🌳 Forest Guardian's Boots"
+        custom_model_data: 2004
+        hide_attributes: true
+        color:
+          red: 34
+          green: 139
+          blue: 34
+        lore:
+          - "§7Silent steps through the woods"
+          - "§7Leaves no footprints"
+
+  # Desert Wanderer Set (Tier 3 - Yellow Leather)
+  DESERT_WANDERER:
+    name: "Desert Wanderer's Armor"
+    page: 1
+    tier: 3
+    requires: "FOREST_GUARDIAN"
+    slots:
+      helmet: 12
+      chestplate: 21
+      leggings: 30
+      boots: 39
+    cost:
+      helmet: 400
+      chestplate: 600
+      leggings: 500
+      boots: 300
+    pieces:
+      helmet:
+        multiplier: 1.5
+        rolls: 2
+      chestplate:
+        multiplier: 1.75
+        rolls: 2
+      leggings:
+        multiplier: 1.6
+        rolls: 2
+      boots:
+        multiplier: 1.5
+        rolls: 1
+    gui:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§e🌵 Desert Wanderer's Headwrap"
+        custom_model_data: 3001
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Protects from harsh sun"
+          - "§7Keeps sand out of your eyes"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+50% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§e🌵 Desert Wanderer's Robe"
+        custom_model_data: 3002
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Light and airy"
+          - "§7Perfect for hot climates"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+75% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§e🌵 Desert Wanderer's Pants"
+        custom_model_data: 3003
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Breathable fabric"
+          - "§7Resists sand damage"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+60% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§e🌵 Desert Wanderer's Sandals"
+        custom_model_data: 3004
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Specially designed for sand"
+          - "§7Never sinks in dunes"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+50% Shard Drop Rate"
+          - "§e+0 Extra Rolls"
+    armor:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§e🌵 Desert Wanderer's Headwrap"
+        custom_model_data: 3001
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Protects from harsh sun"
+          - "§7Keeps sand out of your eyes"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§e🌵 Desert Wanderer's Robe"
+        custom_model_data: 3002
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Light and airy"
+          - "§7Perfect for hot climates"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§e🌵 Desert Wanderer's Pants"
+        custom_model_data: 3003
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Breathable fabric"
+          - "§7Resists sand damage"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§e🌵 Desert Wanderer's Sandals"
+        custom_model_data: 3004
+        hide_attributes: true
+        color:
+          red: 255
+          green: 223
+          blue: 0
+        lore:
+          - "§7Specially designed for sand"
+          - "§7Never sinks in dunes"
+
+  # Frost Walker Set (Tier 4 - Light Blue Leather)
+  FROST_WALKER:
+    name: "Frost Walker's Armor"
+    page: 1
+    tier: 4
+    requires: "DESERT_WANDERER"
+    slots:
+      helmet: 13
+      chestplate: 22
+      leggings: 31
+      boots: 40
+    cost_enchanted:
+      helmet: 5
+      chestplate: 8
+      leggings: 7
+      boots: 4
+    pieces:
+      helmet:
+        multiplier: 2.0
+        rolls: 2
+      chestplate:
+        multiplier: 2.5
+        rolls: 3
+      leggings:
+        multiplier: 2.25
+        rolls: 2
+      boots:
+        multiplier: 2.0
+        rolls: 2
+    gui:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§b❄ Frost Walker's Crown"
+        custom_model_data: 5001
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Crafted from eternal ice"
+          - "§7Prevents freezing"
+          - "§b§lFrost-touched"
+          - ""
+          - "§d§lCost: §5✨ 5 Enchanted Shards"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+100% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§b❄ Frost Walker's Embrace"
+        custom_model_data: 5002
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Radiates cold aura"
+          - "§7Freezes nearby water"
+          - "§b§lFrost-infused"
+          - ""
+          - "§d§lCost: §5✨ 8 Enchanted Shards"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+150% Shard Drop Rate"
+          - "§e+2 Extra Rolls"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§b❄ Frost Walker's Stride"
+        custom_model_data: 5003
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Woven from snow crystals"
+          - "§7Never feels cold"
+          - "§b§lFrost-blessed"
+          - ""
+          - "§d§lCost: §5✨ 7 Enchanted Shards"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+125% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§b❄ Frost Walker's Steps"
+        custom_model_data: 5004
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Freezes water on contact"
+          - "§7Leaves icy footprints"
+          - "§b§lFrost-bound"
+          - ""
+          - "§d§lCost: §5✨ 4 Enchanted Shards"
+          - ""
+          - "§6Piece Bonus:"
+          - "§e+100% Shard Drop Rate"
+          - "§e+1 Extra Roll"
+    armor:
+      helmet:
+        material: LEATHER_HELMET
+        display_name: "§b❄ Frost Walker's Crown"
+        custom_model_data: 5001
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Crafted from eternal ice"
+          - "§7Prevents freezing"
+          - "§b§lFrost-touched"
+      chestplate:
+        material: LEATHER_CHESTPLATE
+        display_name: "§b❄ Frost Walker's Embrace"
+        custom_model_data: 5002
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Radiates cold aura"
+          - "§7Freezes nearby water"
+          - "§b§lFrost-infused"
+      leggings:
+        material: LEATHER_LEGGINGS
+        display_name: "§b❄ Frost Walker's Stride"
+        custom_model_data: 5003
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Woven from snow crystals"
+          - "§7Never feels cold"
+          - "§b§lFrost-blessed"
+      boots:
+        material: LEATHER_BOOTS
+        display_name: "§b❄ Frost Walker's Steps"
+        custom_model_data: 5004
+        hide_attributes: true
+        color:
+          red: 135
+          green: 206
+          blue: 250
+        lore:
+          - "§7Freezes water on contact"
+          - "§7Leaves icy footprints"
+          - "§b§lFrost-bound"
+
+pickaxes:
+  # Basic Miner's Pickaxe (Tier 1 - No requirements)
+  BASIC_MINER:
+    name: "Basic Miner's Pickaxe"
+    multiplier: 1.2
+    rolls: 1
+    page: 2
+    tier: 1
+    slot: 10
+    cost_pickaxe: 200
+    gui:
+      material: IRON_PICKAXE
+      display_name: "§7⛏ Basic Miner's Pickaxe"
+      custom_model_data: 4001
+      hide_attributes: true
+      lore:
+        - "§7A simple but reliable tool"
+        - "§7Perfect for beginners"
+        - ""
+        - "§6Bonus: §e+20% Shard Drop Rate"
+        - "§6Extra Roll: §e1x"
+        - ""
+        - "§6Cost: §e200 Pickaxe Shards"
+    item:
+      material: IRON_PICKAXE
+      display_name: "§7⛏ Basic Miner's Pickaxe"
+      custom_model_data: 4001
+      hide_attributes: true
+      lore:
+        - "§7A simple but reliable tool"
+        - "§7Perfect for beginners"
+
+  # Gem Hunter's Pickaxe (Tier 2 - Requires Basic Miner's Pickaxe)
+  GEM_HUNTER:
+    name: "Gem Hunter's Pickaxe"
+    multiplier: 1.5
+    rolls: 2
+    page: 2
+    tier: 2
+    requires: "BASIC_MINER"
+    slot: 11
+    cost_pickaxe: 400
+    gui:
+      material: DIAMOND_PICKAXE
+      display_name: "§b💎 Gem Hunter's Pickaxe"
+      custom_model_data: 4002
+      hide_attributes: true
+      lore:
+        - "§7Specially designed for gem mining"
+        - "§7Increased luck with precious stones"
+        - ""
+        - "§6Bonus: §e+50% Shard Drop Rate"
+        - "§6Extra Rolls: §e2x"
+        - ""
+        - "§6Cost: §e400 Pickaxe Shards"
+    item:
+      material: DIAMOND_PICKAXE
+      display_name: "§b💎 Gem Hunter's Pickaxe"
+      custom_model_data: 4002
+      hide_attributes: true
+      lore:
+        - "§7Specially designed for gem mining"
+        - "§7Increased luck with precious stones"
+
+  # Hellforge Pickaxe (Tier 3 - Requires Gem Hunter's Pickaxe)
+  HELLFORGE:
+    name: "Hellforge Pickaxe"
+    multiplier: 2.0
+    rolls: 3
+    page: 2
+    tier: 3
+    requires: "GEM_HUNTER"
+    slot: 12
+    cost_enchanted_pickaxe: 5
+    gui:
+      material: NETHERITE_PICKAXE
+      display_name: "§4🔥 Hellforge Pickaxe"
+      custom_model_data: 4003
+      hide_attributes: true
+      lore:
+        - "§7Forged in the depths of the Nether"
+        - "§7Melts through stone like butter"
+        - "§4§lInfused with hellfire"
+        - ""
+        - "§6Bonus: §e+100% Shard Drop Rate"
+        - "§6Extra Rolls: §e3x"
+        - ""
+        - "§d§lCost: §5✨ 5 Enchanted Pickaxe Shards"
+    item:
+      material: NETHERITE_PICKAXE
+      display_name: "§4🔥 Hellforge Pickaxe"
+      custom_model_ data: 4003
+      hide_attributes: true
+      lore:
+        - "§7Forged in the depths of the Nether"
+        - "§7Melts through stone like butter"
+        - "§4§lInfused with hellfire"
+
+  # Void Reaper Pickaxe (Tier 4 - Requires Hellforge Pickaxe)
+  VOID_REAPER:
+    name: "Void Reaper's Pickaxe"
+    multiplier: 3.0
+    rolls: 4
+    page: 2
+    tier: 4
+    requires: "HELLFORGE"
+    slot: 13
+    cost_enchanted_pickaxe: 10
+    gui:
+      material: NETHERITE_PICKAXE
+      display_name: "§5☠ Void Reaper's Pickaxe"
+      custom_model_data: 4004
+      hide_attributes: true
+      lore:
+        - "§7Tears through reality itself"
+        - "§7Harvests the essence of the void"
+        - "§5§lVoid-touched"
+        - ""
+        - "§6Bonus: §e+200% Shard Drop Rate"
+        - "§6Extra Rolls: §e4x"
+        - ""
+        - "§d§lCost: §5✨ 10 Enchanted Pickaxe Shards"
+    item:
+      material: NETHERITE_PICKAXE
+      display_name: "§5☠ Void Reaper's Pickaxe"
+      custom_model_data: 4004
+      hide_attributes: true
+      lore:
+        - "§7Tears through reality itself"
+        - "§7Harvests the essence of the void"
+        - "§5§lVoid-touched"

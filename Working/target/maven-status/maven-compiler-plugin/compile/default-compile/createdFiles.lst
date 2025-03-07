@@ -1,0 +1,14 @@
+com\example\shardplugin\listeners\ArmorDropListener.class
+com\example\shardplugin\listeners\PlayerJoinListener.class
+com\example\shardplugin\listeners\BlockBreakListener$1.class
+com\example\shardplugin\commands\ShardCommands.class
+com\example\shardplugin\ShardPlugin.class
+com\example\shardplugin\gui\ArmorShopGUI.class
+com\example\shardplugin\managers\MessageManager.class
+com\example\shardplugin\managers\ShardManager.class
+com\example\shardplugin\listeners\PickaxeDropListener.class
+com\example\shardplugin\listeners\BlockBreakListener.class
+com\example\shardplugin\managers\ConfigManager.class
+com\example\shardplugin\managers\PickaxeManager.class
+com\example\shardplugin\listeners\InventoryListener.class
+com\example\shardplugin\managers\ArmorManager.class
